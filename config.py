@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from colorama import Fore, Style
 
 IDENT = " "
@@ -9,3 +11,5 @@ ERR_NAME_AND_PHONE = "Give me name and phone please."
 ERR_NAME_AND_PHONES = "Give me name, old phone and new phone please."
 ERR_NAME_AND_BIRTHDAY = "Give me name and birthday please."
 ERR_NAME_ONLY = "Give me a name please."
+
+STORAGE_PATH = Path("addressbook.pkl")

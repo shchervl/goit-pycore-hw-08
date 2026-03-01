@@ -8,8 +8,9 @@ import handlers  # noqa: F401 — imported to registers all @command handlers
 import readline  # noqa: F401 — enables arrow keys and history in input()
 from colorama import Style
 from models.commands import registry
-from config import IDENT, BOT_COLOR, BOT_ERROR_COLOR
+from config import IDENT, BOT_COLOR, BOT_ERROR_COLOR, STORAGE_PATH
 from models.models import AddressBook
+from storage.storage import load_book, save_book
 
 
 def parse_input(user_input):
@@ -21,7 +22,7 @@ def parse_input(user_input):
 
 
 def main():
-    book = AddressBook()
+    book = load_book(STORAGE_PATH)
     print(f"{BOT_COLOR}Welcome to the assistant bot!{Style.RESET_ALL}")
 
     try:
@@ -30,6 +31,7 @@ def main():
             cmd, args = parse_input(user_input)
 
             if cmd in ["close", "exit"]:
+                save_book(book, STORAGE_PATH)
                 print(f"{BOT_COLOR}Good bye!{Style.RESET_ALL}")
                 break
             elif cmd in registry:
@@ -42,6 +44,8 @@ def main():
                 )
     except KeyboardInterrupt:
         print(f"\n{BOT_COLOR}Good bye!{Style.RESET_ALL}")
+    finally:
+        save_book(book, STORAGE_PATH)
 
 
 if __name__ == "__main__":
