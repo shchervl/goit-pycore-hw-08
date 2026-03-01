@@ -20,5 +20,8 @@ def load_book(path: Path) -> AddressBook:
 
 
 def save_book(book: AddressBook, path: Path) -> None:
-    with open(path, "wb") as f:
-        pickle.dump(book, f)
+    try:
+        with open(path, "wb") as f:
+            pickle.dump(book, f)
+    except OSError as e:
+        print(f"Warning: could not save contacts ({e}). Your changes were not persisted.")

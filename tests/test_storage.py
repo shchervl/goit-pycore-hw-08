@@ -66,3 +66,7 @@ class TestSaveBook:
         save_book(AddressBook(), path)
 
         assert path.exists()
+
+    def test_os_error_prints_warning(self, capsys):
+        save_book(AddressBook(), "/no_permission/book.pkl")
+        assert "Warning" in capsys.readouterr().out

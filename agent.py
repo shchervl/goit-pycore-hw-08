@@ -31,7 +31,6 @@ def main():
             cmd, args = parse_input(user_input)
 
             if cmd in ["close", "exit"]:
-                save_book(book, STORAGE_PATH)
                 print(f"{BOT_COLOR}Good bye!{Style.RESET_ALL}")
                 break
             elif cmd in registry:
